@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect
 from werkzeug.exceptions import NotFound
+import config
 
 user = Blueprint('user', __name__, url_prefix='/users', static_folder='../static')
 
@@ -12,9 +13,11 @@ USERS = {
 
 @user.route('/')
 def user_list():
+    config.count += 1
     return render_template(
         'users/list.html',
         users=USERS,
+        count=config.count,
         )
 
 @user.route('/<int:pk>')

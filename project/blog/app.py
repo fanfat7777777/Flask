@@ -16,14 +16,14 @@ import config
 
 def create_app() -> Flask:
     app = Flask(__name__)
+    register_blueprint(app)
     app.run(
         host='127.0.0.1',
         debug=True,
     )
-    register_blueprint(app)
     return app
 
 
 def register_blueprint(app: Flask):
-    app:register_blueprint(user)
-    app:register_blueprint(report)
+    app.register_blueprint(user)
+    app.register_blueprint(report)

@@ -305,3 +305,5 @@ tmp_email/
 .envrc
 .tool-versions
 
+
+project/.vscode/

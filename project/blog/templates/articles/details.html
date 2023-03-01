@@ -6,5 +6,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1>{{ article_name }}</h1>
+    <h1>{{ article_name['name'] }}</h1>
+    <p>{{ article_name['text']}}</p>
+    <p>Автор - {{ article_author }}</p>
 {% endblock %}

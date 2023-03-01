@@ -15,7 +15,7 @@
                 <ul>
                     <li>
                         <a href="{{ url_for('article.get_article', pk=article_id) }}">
-                            {{ articles[article_id] }}
+                            {{ articles[article_id]['name'] }}
                         </a>
                     </li>
                 </ul>

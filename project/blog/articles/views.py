@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 from werkzeug.exceptions import NotFound
-from blog.user.views import USERS
+#from blog.user.views import USERS
 
 article = Blueprint('article', __name__, url_prefix='/articles', static_folder='../static')
 
@@ -44,5 +44,5 @@ def get_article(pk: int):
     return render_template(
         'articles/details.html',
         article_name=article_name,
-        article_author=USERS[article_name['author']],
+        #article_author=USERS[article_name['author']],
     )

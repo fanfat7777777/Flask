@@ -1,12 +1,14 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block title %}
-    {{ super() }}
-    Articles details
+    Article details
 {% endblock %}
-
 {% block body %}
-    <h1>{{ article_name['name'] }}</h1>
-    <p>{{ article_name['text']}}</p>
-    <p>Автор - {{ article_author }}</p>
+    <h1>
+        {{ title }}
+    </h1>
+    <br>
+    {{ text }}
+    <br>
+    {{ author }}
 {% endblock %}

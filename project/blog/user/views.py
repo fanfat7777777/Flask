@@ -1,44 +1,42 @@
-from flask import Blueprint, render_template, redirect, session, escape
+from flask import Blueprint, render_template
 from flask_login import login_required
 from werkzeug.exceptions import NotFound
-import config
+
+user = Blueprint("user", __name__, url_prefix="/users", static_folder="../static")
+USERS = {
+    1: {"name": "Ivan"},
+    2: {"name": "Jon"},
+    3: {"name": "Mary"}
+}
 
 
-user = Blueprint('user', __name__, url_prefix='/users', static_folder='../static')
-
-#USERS = {
-#    1: 'Alice',
-#    2: 'Jon',
-#    3: 'Mike',
-#}
-
-@user.route('/')
+@user.route("/")
+@login_required
 def user_list():
-    if user in session:
-        return 'Logged in as %s' % escape(session[user])
-    return 'You are not logged in'
-
-    from blog.models import User
+    from ..models import User
     users = User.query.all()
-    config.count += 1
     return render_template(
-        'users/list.html',
-        users=users,
-        count=config.count,
-        )
+        "users/list.html",
+        users=users
+    )
 
-@user.route('/<int:pk>')
+
+@user.route("/<int:pk>")
 @login_required
 def profile(pk: int):
-    from blog.models import User
-    
+    from ..models import User
     _user = User.query.filter_by(id=pk).one_or_none()
-
-    if user in session:
-        return 'Logged in as %s' % escape(session[user])
-    return 'You are not logged in'
-    
+    if _user is None:
+        raise NotFound("User id:{}, not found".format(pk))
     return render_template(
-        'users/profile.html',
-        user=_user,
-        )
+        "users/details.html",
+        user=_user
+    )
+
+
+def get_user_name(pk: int):
+    if pk in USERS:
+        user_name = USERS[pk]["name"]
+    else:
+        raise NotFound("User id:{}, not found".format(pk))
+    return user_name

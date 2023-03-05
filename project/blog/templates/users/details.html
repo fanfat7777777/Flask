@@ -1,14 +1,10 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Article details
+    Users details
 {% endblock %}
 {% block body %}
     <h1>
-        {{ title }}
+        {{ user.email }}
     </h1>
-    <br>
-    {{ text }}
-    <br>
-    {{ author }}
 {% endblock %}
